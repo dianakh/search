@@ -72,7 +72,7 @@ public class BaseActivity extends ActionBarActivity {
 	/**
 	 * List item array for navigation drawer items. 
 	 * */
-	protected String[] listArray = { "Home", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+	protected String[] listArray = { "Show recipe", "", "Add recipe", "Show favourite", "Item 4", "Item 5" };
 	protected ArrayList<Items> _items;
 	
 	/**
@@ -118,10 +118,10 @@ public class BaseActivity extends ActionBarActivity {
 		//mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         
 		_items = new ArrayList<Items>();
-		_items.add(new Items("Item One", "Item One Description", R.drawable.item_1));
-		_items.add(new Items("Item Two", "Item Two Description", R.drawable.item_2));
-		_items.add(new Items("Item Three", "Item Three Description", R.drawable.item_3));
-		_items.add(new Items("Item Four", "Item Four Description", R.drawable.item_4));
+		_items.add(new Items("Show Recipe", "Item One Description", R.drawable.item_1));
+		_items.add(new Items("Add recipe", "Item Two Description", R.drawable.item_2));
+		_items.add(new Items("show favourite", "Item Three Description", R.drawable.item_3));
+		_items.add(new Items("profile ", "Item Four Description", R.drawable.item_4));
 		_items.add(new Items("Item Five", "Item Five Description", R.drawable.item_5));
 		
 		//Adding header on list view 
@@ -188,7 +188,8 @@ actionBarDrawerToggle.syncState();
 			  *In this case this base activity will always be call when any child activity will launch.
 			  */
 			isLaunch = false;
-			openActivity(0);
+		//	openActivity(0);
+			startActivity(new Intent(this, ShowRecipe.class));
 		}
 	}
 	
@@ -209,22 +210,22 @@ actionBarDrawerToggle.syncState();
 //		setTitle(listArray[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
 		BaseActivity.position = position; //Setting currently selected position in this field so that it will be available in our child activities. 
-		
+
 		switch (position) {
 		case 0:
-			startActivity(new Intent(this, HomeActivity.class));
+			startActivity(new Intent(this, ShowRecipe.class));
 			break;
 		case 1:
-			startActivity(new Intent(this, Item1Activity.class));
+			startActivity(new Intent(this, ShowRecipe.class));
 			break;
 		case 2:
-			startActivity(new Intent(this, HomeActivity.class));
+			startActivity(new Intent(this, AddRecipe.class));
 			break;
 		case 3:
-			startActivity(new Intent(this, Item3Activity.class));
+			startActivity(new Intent(this, Showfav.class));
 			break;
 		case 4:
-			startActivity(new Intent(this, Item4Activity.class));
+			startActivity(new Intent(this, profile.class));
 			break;
 		case 5:
 			startActivity(new Intent(this, Item5Activity.class));
@@ -303,7 +304,7 @@ actionBarDrawerToggle.syncState();
 
 	// Every time when you press search button on keypad an Activity is recreated which in turn calls this function
 	@Override
-;	protected void onNewIntent(Intent intent) {
+	protected void onNewIntent(Intent intent) {
 
 		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 			String query = intent.getStringExtra(SearchManager.QUERY);
